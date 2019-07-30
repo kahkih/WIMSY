@@ -17,4 +17,5 @@ public class ItemService {
         return this.itemRepository.findAll();
     }
 
+    public Item save(Item newItem) { return this.itemRepository.save(newItem);}
 }
