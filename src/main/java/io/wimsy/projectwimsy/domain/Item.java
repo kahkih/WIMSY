@@ -1,9 +1,6 @@
 package io.wimsy.projectwimsy.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Item {
@@ -11,7 +8,11 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Column(length = 300, nullable = false)
     private String name;
+
+    @Column(length = 300, nullable = false)
     private String description;
 
 
