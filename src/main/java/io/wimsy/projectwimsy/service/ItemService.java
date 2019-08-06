@@ -17,5 +17,18 @@ public class ItemService {
         return this.itemRepository.findAll();
     }
 
-    public Item save(Item newItem) { return this.itemRepository.save(newItem);}
+    public Item findByName(String name) {
+    	return this.itemRepository.findByName(name);
+    }
+    
+    public Item save(Item item) {
+    	return this.itemRepository.save(item);
+    }
+    
+    public Item updateByName(String name, String description) {
+    	Item itemToUpdate = this.findByName(name);
+    	itemToUpdate.setDescription(description);
+    	return this.itemRepository.save(itemToUpdate);
+    }
+    
 }
