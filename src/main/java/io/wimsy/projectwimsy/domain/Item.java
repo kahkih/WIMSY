@@ -15,7 +15,6 @@ public class Item {
     @Column(length = 300, nullable = false)
     private String description;
 
-
     public long getId() {
         return id;
     }

@@ -14,17 +14,28 @@ import org.springframework.web.bind.annotation.*;
 produces = MediaType.APPLICATION_JSON_VALUE
 )
 public class ItemEndpoint {
-@Autowired
+	
+	@Autowired
     ItemService itemService;
 
-@GetMapping(path = "item")
-public ResponseEntity<Iterable<Item>> readAllItems() {
-    return new ResponseEntity<Iterable<Item>>(this.itemService.findAll(), HttpStatus.OK);
-}
-
-    @PostMapping("item")
-    Item newItem(@RequestBody Item newItem) {
-        return this.itemService.save(newItem);
+	@GetMapping(path="item")
+	public ResponseEntity<Iterable<Item>> readAllItems() {
+		return new ResponseEntity<Iterable<Item>>(this.itemService.findAll(), HttpStatus.OK);
+	}
+	
+	@GetMapping("item/{name}")
+    Item findByName(@PathVariable String name) {
+		return this.itemService.findByName(name);
     }
 
+    @PostMapping("item")
+    Item newItem(@RequestBody Item item) {
+        return this.itemService.save(item);
+    }
+    
+    @PutMapping("item/{name}/{description}")
+    Item putById(@PathVariable String name, @PathVariable String description) {
+    	return this.itemService.updateByName(name, description);
+    }
+    
 }
