@@ -17,17 +17,17 @@ public class ItemService {
         return this.itemRepository.findAll();
     }
 
-    public Item findByName(String name) {
-    	return this.itemRepository.findByName(name);
+    public Item findByItemName(String itemName) {
+    	return this.itemRepository.findByItemName(itemName);
     }
     
     public Item save(Item item) {
     	return this.itemRepository.save(item);
     }
     
-    public Item updateByName(String name, String description) {
-    	Item itemToUpdate = this.findByName(name);
-    	itemToUpdate.setDescription(description);
+    public Item updateByItemName(String itemName, String itemDescription) {
+    	Item itemToUpdate = this.findByItemName(itemName);
+    	itemToUpdate.setItemDescription(itemDescription);
     	return this.itemRepository.save(itemToUpdate);
     }
     

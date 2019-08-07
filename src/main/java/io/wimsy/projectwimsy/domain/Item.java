@@ -4,35 +4,37 @@ import javax.persistence.*;
 
 @Entity
 public class Item {
+	
+	public Item() {}
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long itemId;
 
-    @Column(length = 300, nullable = false)
-    private String name;
+    @Column(nullable=false)
+    private String itemName;
 
-    @Column(length = 300, nullable = false)
-    private String description;
+    @Column(nullable=false)
+    private String itemDescription;
 
-    public long getId() {
-        return id;
+    public long getItemId() {
+        return itemId;
     }
 
-    public String getName() {
-        return name;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getItemDescription() {
+        return itemDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
     }
 
 }
