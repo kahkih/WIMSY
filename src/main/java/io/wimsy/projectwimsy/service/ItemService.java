@@ -13,22 +13,16 @@ public class ItemService {
     @Autowired
     ItemRepository itemRepository;
 
-    public Iterable<Item> findAll() {
-        return this.itemRepository.findAll();
-    }
-
-    public Item findByName(String name) {
-    	return this.itemRepository.findByName(name);
+    public Item findByItemName(String itemName) {
+    	return itemRepository.findByItemName(itemName);
     }
     
     public Item save(Item item) {
-    	return this.itemRepository.save(item);
+    	return itemRepository.save(item);
     }
     
-    public Item updateByName(String name, String description) {
-    	Item itemToUpdate = this.findByName(name);
-    	itemToUpdate.setDescription(description);
-    	return this.itemRepository.save(itemToUpdate);
+    public void delete(Item item) {
+    	itemRepository.delete(item);
     }
     
 }
