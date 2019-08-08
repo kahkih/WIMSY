@@ -22,12 +22,12 @@ public class ContainerEndpoint {
 	
 	@GetMapping(path="containers")
 	public ResponseEntity<Iterable<Container>> readAllContainers() {
-		return new ResponseEntity<Iterable<Container>>(this.containerService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<Iterable<Container>>(containerService.findAll(), HttpStatus.OK);
 	}
 	
 	@GetMapping(path="containers/{containerName}")
 	public Container findByContainerName(@PathVariable String containerName) {
-		return this.containerService.findByContainerName(containerName);
+		return containerService.findByContainerName(containerName);
 	}
 	
 }

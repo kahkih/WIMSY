@@ -21,12 +21,12 @@ public class FormEndpoint {
 	
 	@PostMapping(path="containers")
 	public void addForm(@RequestBody Form form) {
-		this.formService.save(form);
+		formService.save(form);
     }
 	
 	@PutMapping(path="containers")
 	public void moveForm(@RequestBody Form form) {
-		this.formService.save(form);
+		formService.move(form);
 	}
 	
 }

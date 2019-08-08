@@ -4,8 +4,6 @@ import javax.persistence.*;
 
 @Entity
 public class Item {
-	
-	public Item() {}
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -16,6 +14,8 @@ public class Item {
 
     @Column(nullable=false)
     private String itemDescription;
+    
+    public Item() {}
 
     public long getItemId() {
         return itemId;
@@ -37,4 +37,21 @@ public class Item {
         this.itemDescription = itemDescription;
     }
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (itemName == null) {
+			if (other.itemName != null)
+				return false;
+		} else if (!itemName.equals(other.itemName))
+			return false;
+		return true;
+	}
+  
 }

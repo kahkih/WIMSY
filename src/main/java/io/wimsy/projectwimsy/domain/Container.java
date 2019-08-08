@@ -7,8 +7,6 @@ import javax.persistence.*;
 @Entity
 public class Container {
 	
-	public Container() {}
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long containerId;
@@ -18,6 +16,8 @@ public class Container {
 	
 	@OneToMany
 	private Set<Item> itemsInContainer = new HashSet<>();
+	
+	public Container() {}
 
 	public long getContainerId() {
 		return containerId;
@@ -41,6 +41,14 @@ public class Container {
 	
 	public void addItemToContainer(Item item) {
 		itemsInContainer.add(item);
+	}
+	
+	public boolean doesContainerIncludeItem(Item item) {
+		return itemsInContainer.contains(item);
+	}
+	
+	public void removeItemFromContainer(Item item) {
+		itemsInContainer.remove(item);
 	}
 	
 }

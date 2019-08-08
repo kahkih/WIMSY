@@ -14,15 +14,15 @@ public class ContainerService {
 	ContainerRepository containerRepository;
 	
 	public Iterable<Container> findAll() {
-		return this.containerRepository.findAll();
+		return containerRepository.findAll();
 	}
 	
 	public Container findByContainerName(String containerName) {
-		return this.containerRepository.findByContainerName(containerName);
+		return containerRepository.findByContainerName(containerName);
 	}
 	
 	public Container save(Container container) {
-		return this.containerRepository.save(container);
+		return containerRepository.save(container);
 	}
 	
 }
