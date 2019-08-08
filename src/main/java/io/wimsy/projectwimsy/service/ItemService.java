@@ -25,10 +25,4 @@ public class ItemService {
     	return this.itemRepository.save(item);
     }
     
-    public Item updateByItemName(String itemName, String itemDescription) {
-    	Item itemToUpdate = this.findByItemName(itemName);
-    	itemToUpdate.setItemDescription(itemDescription);
-    	return this.itemRepository.save(itemToUpdate);
-    }
-    
 }
