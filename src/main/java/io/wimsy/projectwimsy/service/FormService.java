@@ -70,8 +70,6 @@ public class FormService {
 			
 			location.addContainerToLocation(container);
 			
-			locationService.save(location);
-			
 		} else if (isNewItem && !isNewContainer && !isNewLocation) {
 			
 			item = new Item();
@@ -87,11 +85,7 @@ public class FormService {
 				
 				container.addItemToContainer(item);
 				
-				containerService.save(container);
-				
 				location.addContainerToLocation(container);
-				
-				locationService.save(location);
 				
 			}
 			
@@ -101,7 +95,8 @@ public class FormService {
 	
 	public void move(Form form) {
 		
-		Item item;
+		Item oldItemEntry;
+		Item newItemEntry;
 		Container container;
 		Location location;
 		
@@ -109,32 +104,72 @@ public class FormService {
 		boolean isNewContainer = containerService.findByContainerName(form.getContainerName()) == null;
 		boolean isNewLocation = locationService.findByLocationName(form.getLocationName()) == null;
 		
-		if (!isNewItem && !isNewContainer && !isNewLocation) {
+		if (!isNewItem && isNewContainer && isNewLocation) {
 			
-			item = itemService.findByItemName(form.getItemName()); // Te verplaatsen item
-			container = containerService.findByContainerName(form.getContainerName()); // Doel container (evt. de huidige)
-			location = locationService.findByLocationName(form.getLocationName()); // Doel location (evt. de huidige)
+			oldItemEntry = itemService.findByItemName(form.getItemName());
+			newItemEntry = new Item();
+			container = new Container();
+			location = new Location();
 			
+			itemService.delete(oldItemEntry);
 			
+			newItemEntry.setItemName(oldItemEntry.getItemName());
+			newItemEntry.setItemDescription(oldItemEntry.getItemDescription());
 			
+			itemService.save(newItemEntry);
+			
+			container.setContainerName(form.getContainerName());
+			container.addItemToContainer(newItemEntry);
+			
+			containerService.save(container);
+			
+			location.setLocationName(form.getLocationName());
+			location.addContainerToLocation(container);
+			
+			locationService.save(location);
 
-		} else if (itemService.findByItemName(form.getItemName()) != null && containerService.findByContainerName(form.getContainerName()) == null) {
+		} else if (!isNewItem && !isNewContainer && !isNewLocation) {
 			
-//			oldItemEntry = itemService.findByItemName(form.getItemName());
-//			newContainer = new Container();
-//			
-//			itemService.delete(oldItemEntry);
-//			
-//			newItemEntry = new Item();
-//			newItemEntry.setItemName(oldItemEntry.getItemName());
-//			newItemEntry.setItemDescription(oldItemEntry.getItemDescription());
-//			
-//			itemService.save(newItemEntry);
-//			
-//			newContainer.setContainerName(form.getContainerName());
-//			newContainer.addItemToContainer(newItemEntry);
-//			
-//			containerService.save(newContainer);
+			oldItemEntry = itemService.findByItemName(form.getItemName());
+			newItemEntry = new Item();
+			container = containerService.findByContainerName(form.getContainerName());
+			location = locationService.findByLocationName(form.getLocationName());
+			
+			if (location.doesLocationIncludeContainer(container)) {
+				
+				itemService.delete(oldItemEntry);
+				
+				newItemEntry.setItemName(oldItemEntry.getItemName());
+				newItemEntry.setItemDescription(oldItemEntry.getItemDescription());
+				
+				itemService.save(newItemEntry);
+				
+				container.addItemToContainer(newItemEntry);
+				
+				location.addContainerToLocation(container);
+				
+			}
+
+		} else if (!isNewItem && isNewContainer && !isNewLocation) {
+			
+			oldItemEntry = itemService.findByItemName(form.getItemName());
+			newItemEntry = new Item();
+			container = new Container();
+			location = locationService.findByLocationName(form.getLocationName());
+			
+			itemService.delete(oldItemEntry);
+			
+			newItemEntry.setItemName(oldItemEntry.getItemName());
+			newItemEntry.setItemDescription(oldItemEntry.getItemDescription());
+			
+			itemService.save(newItemEntry);
+			
+			container.setContainerName(form.getContainerName());
+			container.addItemToContainer(newItemEntry);
+			
+			containerService.save(container);
+			
+			location.addContainerToLocation(container);
 			
 		}
 		
