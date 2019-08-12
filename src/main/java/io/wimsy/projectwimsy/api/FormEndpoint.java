@@ -19,12 +19,12 @@ public class FormEndpoint {
 	@Autowired
 	FormService formService;
 	
-	@PostMapping(path="containers")
+	@PostMapping
 	public void addForm(@RequestBody Form form) {
 		formService.save(form);
     }
 	
-	@PutMapping(path="containers")
+	@PutMapping
 	public void moveForm(@RequestBody Form form) {
 		formService.move(form);
 	}

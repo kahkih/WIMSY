@@ -5,6 +5,7 @@ public class Form {
 	private String itemName;
 	private String itemDescription;
 	private String containerName;
+	private String locationName;
 	
 	public String getItemName() {
 		return itemName;
@@ -28,6 +29,14 @@ public class Form {
 	
 	public void setContainerName(String containerName) {
 		this.containerName = containerName;
+	}
+	
+	public String getLocationName() {
+		return locationName;
+	}
+	
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
 
 }
